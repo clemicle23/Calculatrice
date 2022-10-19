@@ -1,3 +1,5 @@
+package Model;
+
 public class Accumulateur {
     Pile memoire = new Pile();
 
@@ -24,8 +26,8 @@ public class Accumulateur {
         int[] vals = deuxDerVal();
         int x1= vals[0];
         int x2= vals[1];
-        memoire.push(Integer.toString(x2));
         memoire.push(Integer.toString(x1));
+        memoire.push(Integer.toString(x2));
     }
 
 

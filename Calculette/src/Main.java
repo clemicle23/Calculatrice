@@ -1,16 +1,16 @@
-public class Main {
-    public static void main(String[] args){
-        // TODO Auto-generated method stub
+import View.GUI;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-        Accumulateur calc = new Accumulateur();
+public class
+Main extends Application {
 
-        calc.setMemoire("2");
-        calc.setMemoire("3");
-        calc.setMemoire("4");
-        calc.add();
-        calc.mult();
-        String a = calc.getMemoire().pop();
+    public static void main(String[] args) {
+        launch(args);
+    }
 
-        System.out.println(a);
+    @Override
+    public void start(Stage primaryStage) {
+        GUI fenetre = new GUI(primaryStage);
     }
 }
