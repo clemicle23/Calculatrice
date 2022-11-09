@@ -1,5 +1,4 @@
 import Controler.Controleur;
-import View.GUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,6 +11,6 @@ Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Controleur controleur = new Controleur(primaryStage, "View/calcStyleOrange.css");
+        Controleur controleur = new Controleur(primaryStage, "View/calcStyleYellow.css");
     }
 }

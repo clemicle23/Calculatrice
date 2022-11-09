@@ -64,15 +64,17 @@ public class Controleur implements EventHandler<ActionEvent>, PropertyChangeList
             case '+' -> {
                 String currentString = view.getCurrentString();
                 if (currentString != "") {
-                    if (!accumulateur.isEmpty()){
+                    if (accumulateur.isEmpty()){
                         throwInvalidOperation();
                     }
-                    try{
-                        accumulateur.push(currentString);
-                        view.change("");
-                    }
-                    catch(Exception e){
-                        throwInvalidFormat();
+                    else{
+                        try{
+                            accumulateur.push(currentString);
+                            view.change("");
+                        }
+                        catch(Exception e){
+                            throwInvalidFormat();
+                        }
                     }
                 }
                 accumulateur.add();
@@ -80,15 +82,17 @@ public class Controleur implements EventHandler<ActionEvent>, PropertyChangeList
             case '-' -> {
                 String currentString = view.getCurrentString();
                 if (currentString != "") {
-                    if (!accumulateur.isEmpty()){
+                    if (accumulateur.isEmpty()){
                         throwInvalidOperation();
                     }
-                    try{
-                        accumulateur.push(currentString);
-                        view.change("");
-                    }
-                    catch(Exception e){
-                        throwInvalidFormat();
+                    else{
+                        try{
+                            accumulateur.push(currentString);
+                            view.change("");
+                        }
+                        catch(Exception e){
+                            throwInvalidFormat();
+                        }
                     }
                 }
                 accumulateur.sub();
@@ -96,22 +100,36 @@ public class Controleur implements EventHandler<ActionEvent>, PropertyChangeList
             case 'x' -> {
                 String currentString = view.getCurrentString();
                 if (currentString != "") {
-                    if (!accumulateur.isEmpty()){
+                    if (accumulateur.isEmpty()){
                         throwInvalidOperation();
                     }
-                    accumulateur.push(currentString);
-                    view.change("");
+                    else{
+                        try{
+                            accumulateur.push(currentString);
+                            view.change("");
+                        }
+                        catch(Exception e){
+                            throwInvalidFormat();
+                        }
+                    }
                 }
                 accumulateur.mult();
             }
             case '/' -> {
                 String currentString = view.getCurrentString();
                 if (currentString != "") {
-                    if (!accumulateur.isEmpty()){
+                    if (accumulateur.isEmpty()){
                         throwInvalidOperation();
                     }
-                    accumulateur.push(currentString);
-                    view.change("");
+                    else{
+                        try{
+                            accumulateur.push(currentString);
+                            view.change("");
+                        }
+                        catch(Exception e){
+                            throwInvalidFormat();
+                        }
+                    }
                 }
                 accumulateur.div();
             }
