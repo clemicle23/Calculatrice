@@ -1,76 +1,198 @@
 package Model;
 
-public class Accumulateur {
-    Pile memoire = new Pile();
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
+/**
+ * Gère la pile des nombres en atttente et effectue les opérations.
+ */
+public class Accumulateur {
+    //La mémoire est une Pile contenant les valeurs en attentes
+    private Pile memoire = new Pile();
+    private PropertyChangeSupport emetteur;
+
+
+    /**
+     * Constructeur de Accumulateur
+     * Initialise l'émetteur de type PropertyChangeSupport, qui va envoyer des informations au Controleur lorsque la mémoire (Pile) est modifiée
+     */
     public Accumulateur() {
+        emetteur = new PropertyChangeSupport(this);
     }
 
-    public int[] deuxDerVal() {
+    /**
+     *Ajoute d'un listener à l'émetteur.
+     * @param propertyName Nom indiquant quel type de changement est opéré. Ici, il n'y en a qu'un seul : "changePile".
+     * @param listener Celui qui reçoit les informations lorsqu'un changement est détecté.
+     */
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener){
+        emetteur.addPropertyChangeListener(propertyName, listener);
+    }
 
-        int[] tab = new int[2];
+    /**
+     * Lorsque la méthode est appelée, l'émetteur envoie les anciennes et nouvelles valeurs de la pile.
+     * Le nom du type de changement est "changePile" par défaut.
+     * @param oldValues Anciennes denrières valeurs de la pile.
+     * @param newValues Nouvelles dernières valeurs de la pile.
+     */
+    public void changeAccu(ArrayList<Float> oldValues, ArrayList<Float> newValues){
+        emetteur.firePropertyChange("changePile",oldValues, newValues);
+    }
 
-        String X1 = (String) memoire.pop();
-        String X2 = (String) memoire.pop();
+    /**
+     *
+     * @return La dernière valeur (String) de mémoire sans la supprimer ni la modifier si elle existe. Sinon renvoie un String vide.
+     */
+    public String getLast(){
+        if (!memoire.isEmpty()){
+            String text = memoire.pop();
+            memoire.push(text);
+            return(text);
+        }
+        else{
+            return("");
+        }
+    }
 
-        int x1 = Integer.parseInt(X1);
-        int x2 = Integer.parseInt(X2);
+    /**
+     * @param n Nombre de valeurs que l'on veut
+     * @return Une ArrayList<Float></> contenant les n dernières valeurs de la mémoire sans les supprimer ni les modifier si elles existent. Sinon, renvoie une ArrayList vide
+     */
+    public ArrayList<Float> nLastValues(int n) {
+        ArrayList<Float> lastValues = new ArrayList<>();
 
-        tab[0] = x1;
-        tab[1] = x2;
+        //On parcourt la
+        for (int i=0;i<n;i++){
+            String lastValue = getLast();
+            //Si
+            if (lastValue == "")
+                break;
+            else
 
-        return tab;
+                lastValues.add(Float.parseFloat(memoire.pop()));
+        }
+        for (int i=lastValues.size()-1; i>=0; i--){
+            memoire.push(Float.toString(lastValues.get(i)));
+        }
+
+        return lastValues;
+    }
+
+    public void push(String elem) {
+        ArrayList<Float> oldValues = nLastValues(4);
+        memoire.push(elem);
+        ArrayList<Float> newValues = nLastValues(4);
+        changeAccu(oldValues,newValues);
+    }
+
+    public void drop(){
+        memoire.drop();
+
+    }
+
+    public void clear(){
+        ArrayList<Float> oldValues = nLastValues(4);
+        memoire.clear();
+        ArrayList<Float> newValues = nLastValues(4);
+        changeAccu(oldValues,newValues);
     }
 
     public void swap() {
-        int[] vals = deuxDerVal();
-        int x1= vals[0];
-        int x2= vals[1];
-        memoire.push(Integer.toString(x1));
-        memoire.push(Integer.toString(x2));
+        if (hasTwo()){
+            ArrayList<Float> oldValues = nLastValues(4);
+            float x1= oldValues.get(0);
+            float x2= oldValues.get(1);
+            drop();
+            drop();
+            memoire.push(Float.toString(x1));
+            memoire.push(Float.toString(x2));
+            ArrayList<Float> newValues = nLastValues(4);
+            changeAccu(oldValues,newValues);
+        }
     }
 
 
     public void add() {
-        int[] vals = deuxDerVal();
-        int x1= vals[0];
-        int x2= vals[1];
-        memoire.push(Integer.toString(x1+x2));
+        if (hasTwo()){
+            ArrayList<Float> oldValues = nLastValues(4);
+            float x1= oldValues.get(0);
+            float x2= oldValues.get(1);
+            drop();
+            drop();
+            memoire.push(Float.toString(x1+x2));
+            ArrayList<Float> newValues = nLastValues(4);
+            changeAccu(oldValues,newValues);
+        }
     }
 
     public void sub() {
-        int[] vals = deuxDerVal();
-        int x1= vals[0];
-        int x2= vals[1];
-        memoire.push(Integer.toString(x1-x2));
+        if(hasTwo()){
+            ArrayList<Float> oldValues = nLastValues(4);
+            float x1= oldValues.get(0);
+            float x2= oldValues.get(1);
+            drop();
+            drop();
+            memoire.push(Float.toString(x2-x1));
+            ArrayList<Float> newValues = nLastValues(4);
+            changeAccu(oldValues,newValues);
+        }
     }
 
     public void mult() {
-        int[] vals = deuxDerVal();
-        int x1= vals[0];
-        int x2= vals[1];
-        memoire.push(Integer.toString(x1*x2));
+        if (hasTwo()){
+            ArrayList<Float> oldValues = nLastValues(4);
+            float x1= oldValues.get(0);
+            float x2= oldValues.get(1);
+            drop();
+            drop();
+            memoire.push(Float.toString(x1*x2));
+            ArrayList<Float> newValues = nLastValues(4);
+            changeAccu(oldValues,newValues);
+        }
     }
 
     public void div() {
-        int[] vals = deuxDerVal();
-        int x1= vals[0];
-        int x2= vals[1];
-        memoire.push(Integer.toString(x1/x2));
+        if (hasTwo()){
+            ArrayList<Float> oldValues = nLastValues(4);
+            float x1= oldValues.get(0);
+            float x2= oldValues.get(1);
+            drop();
+            drop();
+            memoire.push(Float.toString(x2/x1));
+            ArrayList<Float> newValues = nLastValues(4);
+            changeAccu(oldValues,newValues);
+        }
     }
 
     public void neg() {
-        String X1 = (String) memoire.pop();
-        int x1 = Integer.parseInt(X1);
-        memoire.push(Integer.toString(-x1));
+        if (!memoire.isEmpty()){
+            ArrayList<Float> oldValues = nLastValues(4);
+            float x1= oldValues.get(0);
+            drop();
+            memoire.push(Float.toString(-x1));
+            ArrayList<Float> newValues = nLastValues(4);
+            changeAccu(oldValues,newValues);
+        }
     }
 
-    public void setMemoire(String elem) {
-        memoire.push(elem);
+    public boolean hasTwo(){
+        if  (!memoire.isEmpty()){
+            String x1 = memoire.pop();
+            if  (!memoire.isEmpty()){
+                memoire.push(x1);
+                return true;
+            }
+            memoire.push(x1);
+            return false;
+        }
+        return false;
     }
 
-    public Pile getMemoire() {
-        return(memoire);
+    public boolean isEmpty(){
+        return memoire.isEmpty();
     }
+
+
 
 }

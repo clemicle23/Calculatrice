@@ -1,0 +1,36 @@
+.button{
+    -fx-pref-width: 80px;
+    -fx-pref-height: 50px;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 122%, #9b36ce, #000000);
+    -fx-text-fill: #FFFFFF;
+    -fx-background-insets: 0,1,2,3;
+    -fx-border-color: #7a06d9;
+    -fx-border-width: 1;
+    -fx-border-radius: 2;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 14pt;
+
+
+}
+
+
+.button:pressed{
+    -fx-background-color: radial-gradient(center 50% 50%, radius 99%, #9923e5, #cf94ee);
+    -fx-text-fill: #444343;
+}
+
+.label{
+    -fx-pref-width: 326px;
+    -fx-pref-height: 40px;
+    -fx-border-color:#5a058d;
+    -fx-border-width: 1;
+    -fx-background-color: linear-gradient(#8957ab 3%, #d69ff8 8%, #d69ff8 92%,  #8957ab 98%);
+    -fx-text-fill: #444343;
+    -fx-font-size: 12pt;
+    -fx-text-alignment: right;
+    fx-effect: dropshadow( one-pass-box , #ddc1fc, 5, 0.0 , 0 , 1 );
+}
+
+.cell{
+    -fx-background-color: #ddc1fc;;
+}

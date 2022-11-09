@@ -1,21 +1,15 @@
-import Model.Accumulateur;
+
+import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args){
         // TODO Auto-generated method stub
 
-        Accumulateur calc = new Accumulateur();
 
-        calc.setMemoire("16");
-        calc.setMemoire("3");
-        calc.setMemoire("5");
+        ArrayList<Float> values = new ArrayList<>();
+        values.add(9.0F);
+        System.out.println(values.get(0));
 
-        calc.add();
-        calc.swap();
-        calc.sub();
-        calc.neg();
-        String a = calc.getMemoire().pop();
 
-        System.out.println(a);
     }
 }
