@@ -9,10 +9,7 @@
     -fx-border-radius: 2;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 14pt;
-
-
 }
-
 
 .button:pressed{
     -fx-background-color: radial-gradient(center 50% 50%, radius 99%, #1eab32, #82e196);
@@ -31,6 +28,42 @@
     fx-effect: dropshadow( one-pass-box , #c1fcd2, 5, 0.0 , 0 , 1 );
 }
 
-.cell{
-    -fx-background-color: #ddc1fc;;
+.menu-item{
+    -fx-pref-width: 100px;
+    -fx-pref-height: 30px;
+    -fx-background-color: #a3fd95;
+}
+
+.menu-item:hover{
+    -fx-background-color: #50d333;
+}
+
+.menu-item .label {
+    -fx-font-size: 14pt;
+    -fx-text-fill: #111111;
+    -fx-background-color: #a3fd95;
+    -fx-border-color: #a3fd95;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 90px;
+}
+
+.menu .label {
+    -fx-font-size: 14pt;
+    -fx-text-fill: #111111;
+    -fx-background-color: #a3fd95;
+    -fx-border-radius: 0;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 30px;
+}
+
+.menu-bar{
+    -fx-background-color: None;
+}
+
+.label2{
+    -fx-text-fill: #c42424;
+    -fx-background-color: None;
+    -fx-border-color: None;
+    -fx-pref-width: 200px;
+    -fx-font-size: 11pt;
 }

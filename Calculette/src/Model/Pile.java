@@ -11,14 +11,14 @@ public class Pile extends Stack<String>{
     }
 
     /**
-     * Méthode supprimant le dernier élément de la pile
+     *Supprime le dernier élément de la pile
      */
     public void drop() {
         this.pop();
     }
 
     /**
-     * Méthode supprimant tous les éléments de la pile
+     * Supprime tous les éléments de la pile
      */
     public void clear(){
         while (!this.isEmpty()){

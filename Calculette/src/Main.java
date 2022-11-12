@@ -11,6 +11,6 @@ Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Controleur controleur = new Controleur(primaryStage, "View/calcStyleYellow.css");
+        Controleur controleur = new Controleur(primaryStage);
     }
 }
